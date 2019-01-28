@@ -173,7 +173,7 @@ abstract class EventHandler {
         System.out.println("The grab command works the same way, but instead of getting information you can pick up " +
                 "items (potions and coins).\nNote: Grabbing tiles (walls, spikes, bananas) or enemies (goblins, skeletons," +
                 " baby dragons, and dragons) doesn't work, so don't do it.");
-        System.out.println("Well you can, but you won't like the computers response.");
+        System.out.println("Well you can, but you won't like the computer's response.");
         System.out.println("The stats command tells you how much of each item you have and your health.");
         System.out.println("The quit command exits you out of the game, doesn't work if you're in a fight though.");
         System.out.println("Finally, the \'p\' command executes the last command you typed.\nP is for previous.");
