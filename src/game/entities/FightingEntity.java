@@ -7,9 +7,9 @@ public class FightingEntity extends Entity {
 
     //statistics of fighting entities
     private int currentHealth;
-    private int maxHealth;
-    private int power;
-    private int armor;
+    private final int maxHealth;
+    private final int power;
+    private final int armor;
     private boolean isDefending;
 
     /**

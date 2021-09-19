@@ -1,3 +1,3 @@
 # DungeonCrawler
 
-A roguelike game. I have not completely thought of the name yet.
+A roguelike game without a good name.

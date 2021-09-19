@@ -8,7 +8,7 @@ import java.util.*;
  */
 class MainMenu {
 
-    private Leaderboard leaderboard;
+    private final Leaderboard leaderboard;
 
     /**
      * The main menu constructor.

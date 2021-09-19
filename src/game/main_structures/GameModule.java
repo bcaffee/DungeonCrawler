@@ -187,14 +187,14 @@ class GameModule {
                     } else if (entity instanceof Wall) {
                         System.out.println("Do you think your hands are big enough to grab walls?");
 
-                    } else if (entity instanceof Banana) {
-                        System.out.println("Are you hungry for bananas? Sorry you can't grab them!");
+                    } else if (entity instanceof Slime) {
+                        System.out.println("Sorry, you can't grab slime!");
 
                     } else if (entity instanceof Spike) {
-                        System.out.println("Why in the world would you want to grab a spike!?");
+                        System.out.println("Why in the world would you want to grab a spike?!");
 
                     } else {
-                        System.out.println("handleCollision(): This is should never happen.");
+                        System.out.println("handleCollision(): This should never happen.");
                     }
 
                     //Otherwise the collider must be of type Building
@@ -283,11 +283,11 @@ class GameModule {
                 if (entity instanceof Wall) {
                     System.out.println(this.player.getName() + " can't walk through walls!");
 
-                } else if (entity instanceof Banana) {
-                    System.out.println(this.player.getName() + " steps on a banana. You slip, fall, and lose 1 health.");
+                } else if (entity instanceof Slime) {
+                    System.out.println(this.player.getName() + " steps on some slime. You slip, fall, and lose 1 health.");
                     this.player.changeHealth(-1);
 
-                    //Don't keep the banana
+                    //Don't keep the slime
                     this.map.removeEntityAt(entity.getPosX(), entity.getPosY());
 
                     //Slide the player an additional tile in the y direction
@@ -331,15 +331,15 @@ class GameModule {
         } else if (entity instanceof Wall) {
             System.out.println("That's a wall.");
 
-        } else if (entity instanceof Banana) {
-            System.out.println("It's a banana. Why would that be there?!");
+        } else if (entity instanceof Slime) {
+            System.out.println("That's some slime.");
 
         } else if (entity instanceof Spike) {
             System.out.println("That looks like it might hurt.");
 
             //enemies
         } else if (entity instanceof Goblin) {
-            System.out.println("That's a goblin! KILL IT!");
+            System.out.println("That's a goblin!");
 
         } else if (entity instanceof Skeleton) {
             System.out.println("That's a skeleton... You might want to be aware of it's super fancy bow (It goes first in combat).");
@@ -427,9 +427,12 @@ class GameModule {
 
         this.map = new Map(this.level, this.player);
 
-        //Put the player on the map
-        /*this.map.placePlayerAt(this.player, Level1Data.PLAYER_STARTING_LOCATION[0],
-                Level1Data.PLAYER_STARTING_LOCATION[1]);*/
+        /*
+        Put the player on the map
+
+         this.map.placePlayerAt(this.player, Level1Data.PLAYER_STARTING_LOCATION[0],
+               Level1Data.PLAYER_STARTING_LOCATION[1]);
+        */
     }
 
     /**

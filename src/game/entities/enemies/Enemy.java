@@ -10,11 +10,11 @@ import java.util.Random;
  */
 public class Enemy extends FightingEntity implements Comparable<Enemy> {
 
-    private Player player;
+    private final Player player;
 
-    private int attackChance;
-    private int defendChance;
-    private int stallChance;
+    private final int attackChance;
+    private final int defendChance;
+    private final int stallChance;
 
     /**
      * Represents an Enemy object on the map.

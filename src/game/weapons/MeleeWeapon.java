@@ -5,7 +5,7 @@ package game.weapons;
  */
 public class MeleeWeapon extends Weapon {
 
-    private int extraPower;
+    private final int extraPower;
 
     /**
      * Represents a MeleeWeapon object that is in the player's inventory.

@@ -2,8 +2,8 @@ package game.entities;
 
 public class Entity {
 
-    private String name;
-    private char appearance;
+    private final String name;
+    private final char appearance;
     private int posX;
     private int posY;
 

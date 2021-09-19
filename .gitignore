@@ -3,3 +3,10 @@
 **/.vscode
 **/out
 **/Thumbs.db
+*.html
+*.txt
+*.js
+*.png
+*.css
+*.zip
+Documentation/element-list

@@ -152,7 +152,7 @@ abstract class EventHandler {
         System.out.println();
 
         //Print the commands with commas in between except on the last one
-        System.out.print("This is a list of acceptable commands: ");
+        System.out.print("List of acceptable commands: ");
         for (int i = 0; i < COMMAND_LIST.length; i++) {
             if (i == COMMAND_LIST.length - 1) {
                 System.out.print(COMMAND_LIST[i]);
@@ -163,22 +163,18 @@ abstract class EventHandler {
 
         System.out.println();
         System.out.println();
-        System.out.println("The goal of the game is to get through as many levels as you can and to get as many coins as possible.");
-        System.out.println("You can get coins by killing enemies and moving through levels.");
-        System.out.println("The game ends when you die and your score is based on the level you got to and the coins you had when you died.");
-        System.out.println("The \'P\' character is you (the player).");
+        System.out.println("Try to survive as many dungeons (levels) as possible.");
+        System.out.println("As you progress through each level, you can get coins by killing enemies. Use them sparingly.");
+        System.out.println("Your score when you die is based on the level you get to.");
+        System.out.println("The 'P' character is you (the player).");
         System.out.println("The move and go commands are the same. Example: move up or go down.");
         System.out.println("The look command followed by a direction (up, down, right, left) gives you information about" +
-                " the space at that direction in relation to the player position.");
-        System.out.println("The grab command works the same way, but instead of getting information you can pick up " +
-                "items (potions and coins).\nNote: Grabbing tiles (walls, spikes, bananas) or enemies (goblins, skeletons," +
-                " baby dragons, and dragons) doesn't work, so don't do it.");
-        System.out.println("Well you can, but you won't like the computer's response.");
-        System.out.println("The stats command tells you how much of each item you have and your health.");
-        System.out.println("The quit command exits you out of the game, doesn't work if you're in a fight though.");
-        System.out.println("Finally, the \'p\' command executes the last command you typed.\nP is for previous.");
-        System.out.println("In some areas of the game it won't work because you won't need it.");
-        System.out.println("You can also spam stuff in the keyboard, but just warning you, the computer will say that you're dumb.");
+                " the space at that direction in relation to the player's position.");
+        System.out.println("The grab command works the same way, but instead of getting information you can pick up items.");
+        System.out.println("The stats command tells you how many turns you have taken in the current level, how much of each" +
+                " item you have, number of enemy kill, and your health.");
+        System.out.println("The quit command exits you out of the game.");
+        System.out.println("Finally, the 'p' command (previous) executes the last command you typed.");
     }
 
     /**
@@ -188,7 +184,7 @@ abstract class EventHandler {
         System.out.println(" _    _  _             _               _  _  _                             _        ___ ");
         System.out.println("| |  | || |           | |             (_)| || |                           | |      |__ \\");
         System.out.println("| |  | || |__    __ _ | |_  __      __ _ | || |  _   _   ___   _   _    __| |  ___    ) |");
-        System.out.println("| |/\\| || '_ \\  / _` || __| \\ \\ /\\ / /| || || | | | | | / _ \\ | | | |  / _` | / _ \\  / / ");
+        System.out.println("| |/\\| || '_ \\  / _` || __| \\ \\ /\\ / /| || || | | | | | / _ \\ | | | |  / _`| | / _ \\  / / ");
         System.out.println("\\  /\\  /| | | || (_| || |_   \\ V  V / | || || | | |_| || (_) || |_| | | (_| || (_) ||_|");
         System.out.println(" \\/  \\/ |_| |_| \\__,_| \\__|   \\_/\\_/  |_||_||_|  \\__, | \\___/  \\__,_|  \\__,_| \\___/ (_) ");
         System.out.println("                                                 __/ |");
@@ -227,7 +223,7 @@ abstract class EventHandler {
     /**
      * Checks to see if a command is valid.
      *
-     * @param command TODO 8/28/2018 Rework this sentence: The command that validity is being checked on.
+     * @param command The given command
      * @return Returns true or false based on if the command is valid or not.
      */
     private static boolean isValidCommand(String command) {
@@ -269,31 +265,30 @@ abstract class EventHandler {
      */
     private static Direction convertStringToDirection(String direction) {
 
-        Direction enumifiedDirection;
+        Direction enumeratedDirection;
 
         switch (direction) {
-
             case "up":
-                enumifiedDirection = Direction.UP;
+                enumeratedDirection = Direction.UP;
                 break;
 
             case "down":
-                enumifiedDirection = Direction.DOWN;
+                enumeratedDirection = Direction.DOWN;
                 break;
 
             case "left":
-                enumifiedDirection = Direction.LEFT;
+                enumeratedDirection = Direction.LEFT;
                 break;
 
             case "right":
-                enumifiedDirection = Direction.RIGHT;
+                enumeratedDirection = Direction.RIGHT;
                 break;
 
             //This should never happen
             default:
-                enumifiedDirection = Direction.DEFAULT;
+                enumeratedDirection = Direction.DEFAULT;
                 break;
         }
-        return enumifiedDirection;
+        return enumeratedDirection;
     }
 }

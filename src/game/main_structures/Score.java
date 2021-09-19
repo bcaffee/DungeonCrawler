@@ -2,7 +2,7 @@ package game.main_structures;
 
 class Score implements Comparable<Score> {
 
-    private String playerName;
+    private final String playerName;
     private double score;
 
     /**

@@ -1,14 +1,10 @@
 package game.main_structures;
 
-import game.data.RandomData;
+import game.data.*;
 import game.entities.*;
-import game.entities.buildings.Building;
-import game.entities.buildings.Shop;
+import game.entities.buildings.*;
 import game.entities.enemies.*;
-import game.entities.items.DamagePotion;
-import game.entities.items.HealthPotion;
-import game.entities.items.Item;
-import game.entities.items.WeaponPickUp;
+import game.entities.items.*;
 import game.entities.tiles.*;
 
 import java.util.HashMap;
@@ -38,23 +34,25 @@ class Map {
     private int height;
 
     private boolean collision;
-    private int[] collisionLoc = new int[NUMBER_OF_COORDINATES];
+    private final int[] collisionLoc = new int[NUMBER_OF_COORDINATES];
     private String collisionKind;
 
     private boolean looking;
     private Entity lookAt;
 
+/*
     /**
      * The Map constructor for the level 1 map.
      *
      * @param charMatrix The custom map made of a char matrix.
      * @param player     The player that will need to be placed on the map.
-     */
+     * /
     Map(char[][] charMatrix, Player player) {
         this.map = convertCharMatrixToEntityMatrix(charMatrix, player);
         this.width = this.map[0].length;
         this.height = this.map.length;
     }
+*/
 
     /**
      * The Map constructor for the non-level 1 maps. Even levels means the map is bigger and the player has to use a compass to
@@ -272,17 +270,16 @@ class Map {
      */
     private void getRandomMap(int level, Player player) {
 
-        int[] playerStartingLocationForRandomMap = new int[NUMBER_OF_COORDINATES];
-        int[] winLocationForRandomMap = new int[NUMBER_OF_COORDINATES];
-        int[] buildingLocationForRandomMap = new int[NUMBER_OF_COORDINATES];
+        int[] playerSpawn = new int[NUMBER_OF_COORDINATES];
+        int[] winLocation = new int[NUMBER_OF_COORDINATES];
+        int[] buildingLocation = new int[NUMBER_OF_COORDINATES];
         int[] weaponLocation = new int[NUMBER_OF_COORDINATES];
 
         Random random = new Random();
-
-        //Even map
         int randomHeight;
         int randomWidth;
 
+        //Even map
         if (level % 2 == 0) {
 
             //Get the randomHeight and randomWidth
@@ -290,16 +287,6 @@ class Map {
                     EVEN_MAP_LOWER_BOUND_HEIGHT;
             randomWidth = random.nextInt(EVEN_MAP_UPPER_BOUND_WIDTH - EVEN_MAP_LOWER_BOUND_WIDTH) +
                     EVEN_MAP_LOWER_BOUND_WIDTH;
-
-            playerStartingLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            playerStartingLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
-            winLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            winLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
-            buildingLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            buildingLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
-            weaponLocation[0] = random.nextInt(randomHeight - 2) + 1;
-            weaponLocation[1] = random.nextInt(randomWidth - 2) + 1;
-
             //Odd map
         } else {
 
@@ -307,28 +294,27 @@ class Map {
                     ODD_MAP_LOWER_BOUND_HEIGHT;
             randomWidth = random.nextInt(ODD_MAP_UPPER_BOUND_WIDTH - ODD_MAP_LOWER_BOUND_WIDTH) +
                     ODD_MAP_LOWER_BOUND_WIDTH;
-
-            playerStartingLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            playerStartingLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
-            winLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            winLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
-            buildingLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            buildingLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
-            weaponLocation[0] = random.nextInt(randomHeight - 2) + 1;
-            weaponLocation[1] = random.nextInt(randomWidth - 2) + 1;
         }
+        playerSpawn[0] = random.nextInt(randomHeight - 2) + 1;
+        playerSpawn[1] = random.nextInt(randomWidth - 2) + 1;
+        winLocation[0] = random.nextInt(randomHeight - 2) + 1;
+        winLocation[1] = random.nextInt(randomWidth - 2) + 1;
+        buildingLocation[0] = random.nextInt(randomHeight - 2) + 1;
+        buildingLocation[1] = random.nextInt(randomWidth - 2) + 1;
+        weaponLocation[0] = random.nextInt(randomHeight - 2) + 1;
+        weaponLocation[1] = random.nextInt(randomWidth - 2) + 1;
 
         //Make sure the shop's location isn't on the win location
-        while (buildingLocationForRandomMap[0] == winLocationForRandomMap[0] &&
-                buildingLocationForRandomMap[1] == winLocationForRandomMap[1]) {
+        while (buildingLocation[0] == winLocation[0] &&
+                buildingLocation[1] == winLocation[1]) {
 
-            buildingLocationForRandomMap[0] = random.nextInt(randomHeight - 2) + 1;
-            buildingLocationForRandomMap[1] = random.nextInt(randomWidth - 2) + 1;
+            buildingLocation[0] = random.nextInt(randomHeight - 2) + 1;
+            buildingLocation[1] = random.nextInt(randomWidth - 2) + 1;
         }
 
-        RandomData.setPlayerStartLocation(playerStartingLocationForRandomMap);
-        RandomData.setWinLocation(winLocationForRandomMap);
-        RandomData.setBuildingLocation(buildingLocationForRandomMap);
+        RandomData.setPlayerStartLocation(playerSpawn);
+        RandomData.setWinLocation(winLocation);
+        RandomData.setBuildingLocation(buildingLocation);
 
         //Set up map
         this.height = randomHeight;
@@ -337,7 +323,7 @@ class Map {
 
         //Draw map
         drawPerimeter(this.map);
-        drawInside(this.map, playerStartingLocationForRandomMap, buildingLocationForRandomMap, winLocationForRandomMap, weaponLocation, player);
+        drawInside(this.map, playerSpawn, buildingLocation, winLocation, weaponLocation, player);
     }
 
     /**
@@ -413,13 +399,14 @@ class Map {
         }
     }
 
+/*
     /**
      * Converts a char matrix to an entity matrix.
      *
      * @param map    The char matrix being converted.
      * @param player The player object used to pass into getEntityFromAppearance().
      * @return The entity matrix that is the result of the conversion.
-     */
+     * /
     private Entity[][] convertCharMatrixToEntityMatrix(char[][] map, Player player) {
 
         Entity[][] temp = new Entity[map.length][map[0].length];
@@ -431,7 +418,9 @@ class Map {
         }
         return temp;
     }
+*/
 
+/*
     /**
      * Gets a specific entity given an appearance, a player object, and coordinates.
      *
@@ -440,7 +429,7 @@ class Map {
      * @param posX       The x coordinate.
      * @param posY       The y coordinate.
      * @return The specific entity.
-     */
+     * /
     private Entity getEntityFromAppearance(char appearance, Player player, int posX, int posY) {
 
         Entity entity;
@@ -476,7 +465,7 @@ class Map {
                 break;
 
             case ')':
-                entity = new Banana(posX, posY);
+                entity = new Slime(posX, posY);
                 break;
 
             case '^':
@@ -502,6 +491,7 @@ class Map {
         }
         return entity;
     }
+*/
 
     /**
      * Fills the perimeter of the entity matrix with walls.
@@ -512,7 +502,6 @@ class Map {
 
         for (int row = 0; row < entityMatrix.length; row++) {
             for (int col = 0; col < entityMatrix[0].length; col++) {
-
                 if (col == 0 || col == entityMatrix[0].length - 1 || row == entityMatrix.length - 1 || row == 0) {
                     entityMatrix[row][col] = new Wall(row, col);
                 }
@@ -557,7 +546,7 @@ class Map {
      */
     private static Item getItem(int posX, int posY) {
 
-        java.util.Map<Item, Double> itemWeights = new HashMap<>(2);
+        HashMap<Item, Double> itemWeights = new HashMap<>(2);
         itemWeights.put(new HealthPotion(posX, posY), .5);
         itemWeights.put(new DamagePotion(posX, posY), .5);
 
@@ -582,9 +571,9 @@ class Map {
      */
     private static Tile getOtherTile(int posX, int posY) {
 
-        java.util.Map<Tile, Double> tileWeights = new HashMap<>(3);
+        HashMap<Tile, Double> tileWeights = new HashMap<>(3);
         tileWeights.put(new Wall(posX, posY), .6);
-        tileWeights.put(new Banana(posX, posY), .2);
+        tileWeights.put(new Slime(posX, posY), .2);
         tileWeights.put(new Spike(posX, posY), .2);
 
         double ratio = new Random().nextDouble();
@@ -609,7 +598,7 @@ class Map {
      */
     private static Enemy getEnemy(Player player, int posX, int posY) {
 
-        java.util.Map<Enemy, Double> enemyWeights = new HashMap<>(4);
+        HashMap<Enemy, Double> enemyWeights = new HashMap<>(4);
         enemyWeights.put(new Goblin(player, posX, posY), .275);
         enemyWeights.put(new Skeleton(player, posX, posY), .325);
         enemyWeights.put(new Dragon(player, posX, posY), .15);

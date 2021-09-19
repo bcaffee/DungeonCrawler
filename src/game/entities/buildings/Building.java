@@ -9,7 +9,7 @@ public class Building extends Entity {
 
     private int healthPotionsAvailable;
     private int damagePotionsAvailable;
-    private int maxPotionsAbleToBeStored;
+    private final int maxPotionsAbleToBeStored;
 
     /**
      * Represents a Building object on the map.

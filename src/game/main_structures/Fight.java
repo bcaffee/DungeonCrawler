@@ -12,10 +12,10 @@ class Fight {
     private String victor;
 
     //holds the stats of the Player from after the fight
-    private Player modifiedPlayer;
+    private final Player modifiedPlayer;
     private int zeroDamageCounterPlayer;
 
-    private Enemy modifiedEnemy;
+    private final Enemy modifiedEnemy;
     private int zeroDamageCounterEnemy;
 
     /**
@@ -61,24 +61,20 @@ class Fight {
             System.out.println(this.modifiedPlayer.healthString());
             System.out.println(this.modifiedEnemy.healthString());
 
-            switch (advantage) {
-
-                //enemy logic
-                case "enemy":
-                    choice = this.modifiedEnemy.aiChoice();
-                    handleChoice(advantage, choice);
-                    System.out.println("========");
-                    handleTurn("player");
-                    break;
+            //enemy logic
+            if ("enemy".equals(advantage)) {
+                choice = this.modifiedEnemy.aiChoice();
+                handleChoice(advantage, choice);
+                System.out.println("========");
+                handleTurn("player");
 
                 //Default is player
-                default:
-                    GameModule.incrementTurns();
-                    choice = playerChoice();
-                    handleChoice(advantage, choice);
-                    System.out.println("========");
-                    handleTurn("enemy");
-                    break;
+            } else {
+                GameModule.incrementTurns();
+                choice = playerChoice();
+                handleChoice(advantage, choice);
+                System.out.println("========");
+                handleTurn("enemy");
             }
 
             //Otherwise end the fight because one of the combatants must have died

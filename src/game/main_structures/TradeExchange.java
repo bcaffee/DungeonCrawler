@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 class TradeExchange {
 
-    private Player modifiedPlayer;
-    private Building modifiedBuilding;
+    private final Player modifiedPlayer;
+    private final Building modifiedBuilding;
     private boolean done = false;
 
     /**
